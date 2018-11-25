@@ -1,0 +1,135 @@
+<zk xmlns:c="client">
+	<div style="width: 100%;"
+		viewModel="@id('vm') @init('com.safediz.ui.BusPartyViewModel')">
+		<html>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index">Home</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Administration</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">User</a>
+				</li>
+				<li class="breadcrumb-item active">Devices</li>
+				<!-- Breadcrumb Menu-->
+				<li class="breadcrumb-menu d-md-down-none">
+					<div class="btn-group" role="group"
+						aria-label="Button group with nested dropdown">
+						<a class="btn" href="#">
+							<i class="icon-speech"></i>
+						</a>
+						<a class="btn" href="#">
+							<i class="icon-graph"></i>
+							&#160;Dashboard
+						</a>
+						<a class="btn" href="#">
+							<i class="icon-settings"></i>
+							&#160;Settings
+						</a>
+					</div>
+				</li>
+			</ol>
+		</html>
+
+		<div class="container-fluid">
+
+			<div class="animated fadeIn">
+				<div class="card">
+					<div class="card-body">
+						<div sclass="row">
+							<div class="form-group col-sm-4">
+								<textbox sclass="form-control"
+									placeholder="Search" />
+							</div>
+							<div class="form-group col-sm-8">
+								<button onClick="@command('onAddNew')"
+									class="btn btn-primary pull-right" iconSclass="fa fa-plus"
+									label="Add">
+								</button>
+							</div>
+						</div>
+
+						<grid
+							model="@load(vm.records) @template(each.editStatus ? 'editable' : 'noneditable')"
+							mold="paging" pageSize="10" class="table-bordered">
+							<columns>
+								<column label="#" width="4%" />
+								<column label="Name" />
+								<column label="Password" />
+								<column label="Description" />
+								<column label="Latitude" />
+								<column label="Longitude" />
+								<column label="Actions" width="6%" />
+							</columns>
+							<rows>
+								<template name="noneditable">
+									<row>
+										<label
+											style="text-align: center;"
+											value="${forEachStatus.index + 1}" />
+										<label value="@load(each.name)" />
+										<textbox type="password"
+											sclass="form-control" readonly="true"
+											value="@load(each.password)" />
+										<label
+											value="@load(each.description)" />
+										<label
+											value="@load(each.latitude)" />
+										<label
+											value="@load(each.longitude)" />
+
+										<div sclass="pull-right">
+											<a sclass="icon"
+												disabled="@load(!vm.editable)"
+												tooltiptext=" Update [ ${each.name } ]"
+												iconSclass="fa fa-pencil fa-color-change"
+												onClick="@command('changeEditableStatus', record=each )" />
+
+											<a sclass="icon"
+												disabled="@load(!vm.editable)"
+												tooltiptext=" Delete [ ${each.name } ]"
+												iconSclass="fa fa-trash-o fa-color-danger"
+												onClick="@command('onRemove', record=each )" />
+										</div>
+									</row>
+								</template>
+
+								<template name="editable">
+									<row>
+										<label
+											style="text-align: center;"
+											value="${forEachStatus.index + 1}" />
+										<textbox sclass="form-control"
+											value="@bind(each.name)" />
+										<textbox sclass="form-control"
+											type="password" value="@bind(each.password)" />
+										<textbox sclass="form-control"
+											value="@bind(each.description)" />
+										<doublebox sclass="form-control"
+											value="@bind(each.latitude)" />
+										<doublebox sclass="form-control"
+											value="@bind(each.longitude)" />
+
+										<div sclass="pull-right">
+											<a sclass="icon"
+												iconSclass="fa fa-check fa-color-change"
+												onClick="@command('confirm', record=each,target=self)" />
+
+											<a sclass="icon"
+												iconSclass="fa fa-times fa-color-danger"
+												onClick="@command('changeEditableStatus', record=each )" />
+										</div>
+									</row>
+								</template>
+							</rows>
+						</grid>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</zk>

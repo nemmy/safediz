@@ -1,0 +1,153 @@
+<!--
+	* SAFE DIZ :: Vehicle Tracking System
+	* @version v1.0
+	* Copyright (c) 2018 Emmanuel NSHIMIYIMANA
+-->
+
+
+<?meta charset="utf-8"?>
+<?meta http-equiv="X-UA-Compatible" content="IE=edge"?>
+<?meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"?>
+<?meta name="author" content="Emmanuel NSHIMIYIMANA | nemmy05@gmail.com | +250788795364"?>
+<?meta name="keyword"
+	content="Rwanda, Dashboard"?>
+<?link rel="shortcut icon" href="img/favicon.ico"?>
+<?page title="SAFE DIZ :: Vehicle Tracking System"?>
+
+<!-- Icons -->
+<?link href="vendors/css/flag-icon.min.css" rel="stylesheet"?>
+<?link href="vendors/css/font-awesome.min.css" rel="stylesheet"?>
+<?link href="vendors/css/simple-line-icons.min.css" rel="stylesheet"?>
+
+<!-- Main styles for this application -->
+<?link href="css/style.css" rel="stylesheet"?>
+
+<!-- Styles required by this views -->
+<?link href="vendors/css/daterangepicker.min.css" rel="stylesheet"?>
+<?link href="vendors/css/gauge.min.css" rel="stylesheet"?>
+<?link href="vendors/css/toastr.min.css" rel="stylesheet"?>
+
+<zk>
+
+	<div id="body" class="app app-home flex-row align-items-center"
+		apply="org.zkoss.bind.BindComposer"
+		viewModel="@id('vm') @init('com.safediz.ui.RegisterViewModel')">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="card mx-4">
+						<div class="card-body p-4">
+							<html class="text-center">
+								<h1>SAFE DIZ REGISTER</h1>
+								<p class="text-muted">
+									Create your account
+								</p>
+							</html>
+
+							<div class="input-group mb-3">
+								<div visible="@load(vm.error ne null)"
+									class="p-2 mb-2 full-width bg-danger text-white">
+									<label value="@load(vm.error)" />
+								</div>
+								<div visible="@load(vm.message ne null)"
+									class="p-2 mb-2 full-width bg-success text-white">
+									<label value="@load(vm.message)" />
+								</div>
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<span class="icon-user"></span>
+									</span>
+								</div>
+								<textbox type="text"
+									value="@bind(vm.user.username)" class="form-control"
+									placeholder="Username" />
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										@
+									</span>
+								</div>
+								<textbox type="text"
+									value="@bind(vm.user.email)" class="form-control"
+									placeholder="Email" />
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<span class="icon-lock"></span>
+									</span>
+								</div>
+								<textbox type="password"
+									value="@bind(vm.user.password)" class="form-control"
+									placeholder="Password" />
+							</div>
+
+							<div class="input-group mb-4">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<span class="icon-lock"></span>
+									</span>
+								</div>
+								<textbox type="password"
+									value="@bind(vm.cpwd)" class="form-control"
+									placeholder="Repeat password" />
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<span class="icon-user"></span>
+									</span>
+								</div>
+								<textbox type="text"
+									value="@bind(vm.user.firstname)" class="form-control"
+									placeholder="Firstname" />
+							</div>
+
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text">
+										<span class="icon-user"></span>
+									</span>
+								</div>
+								<textbox type="text"
+									value="@bind(vm.user.lastname)" class="form-control"
+									placeholder="Lastname" />
+							</div>
+
+							<button type="button"
+								onClick="@command('onSave')"
+								class="btn btn-block btn-primary">
+								Create Account
+							</button>
+
+							<div class="card-footer p-4"
+								style="text-align: right;  padding-right: 0 !important;">
+								Already have an account ?
+								<button type="button" href="login"
+									class="btn btn-block- btn-default">
+									Login here
+								</button>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<html>
+			<script src="vendors/js/jquery.min.js"></script>
+			<script src="vendors/js/popper.min.js"></script>
+			<script src="vendors/js/bootstrap.min.js"></script>
+		</html>
+
+	</div>
+</zk>

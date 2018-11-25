@@ -1,0 +1,46 @@
+<zk>
+	<window mode="popup" position="left,bottom"
+		style="bottom: 50;    border-bottom: 1px solid #eff3f5;">
+		<div class="sidebar"
+			viewModel="@id('vm') @init('com.safediz.ui.DashboardComposer')">
+
+			<div class="sidebar-nav card-body">
+
+				<html>
+					<h6>My Devices</h6>
+				</html>
+
+				<textbox placeholder="Search" sclass="form-control"
+					style="font-size: x-small;   font-style: italic;" />
+
+				<separator height="5px" />
+
+				<listbox model="@load(vm.records)" checkmark="true" disabled="true" onSelect="@command('onSelectDevice')"
+					selectedItems="@load(vm.selectedDevices)" multiple="true">
+					<listhead>
+						<listheader hflex="2" />
+						<listheader hflex="3" />
+						<listheader hflex="4" />
+						<listheader hflex="4" />
+						<listheader hflex="6" />
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell />
+							<listcell
+								image="@load('/img/icons/'.concat(each.icon).concat('.png'))" />
+							<listcell>
+								<label value="@load(each.name)"
+									sclass="text-bold" />
+							</listcell>
+							<listcell label="@load(each.imeiNumber)" />
+							<listcell label="@load(each.driver)" />
+						</listitem>
+					</template>
+				</listbox>
+
+			</div>
+
+		</div>
+	</window>
+</zk>

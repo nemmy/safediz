@@ -1,0 +1,64 @@
+<!--
+	* Vehicle Tracking System
+	* @version v1.0
+	* Copyright (c) 2018 Emmanuel NSHIMIYIMANA
+-->
+
+
+<?meta charset="utf-8"?>
+<?meta http-equiv="X-UA-Compatible" content="IE=edge"?>
+<?meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"?>
+<?meta name="description" content="Alba - Bootstrap 4 Admin Template"?>
+<?meta name="author" content="Emmanuel NSHIMIYIMANA | nemmy05@gmail.com | +250788795364"?>
+<?meta name="keyword"
+	content="Rwanda, Dashboard"?>
+<?link rel="shortcut icon" href="img/favicon.ico"?>
+<?page title="Vehicle Tracking System"?>
+
+<!-- Icons -->
+<?link href="vendors/css/flag-icon.min.css" rel="stylesheet"?>
+<?link href="vendors/css/font-awesome.min.css" rel="stylesheet"?>
+<?link href="vendors/css/simple-line-icons.min.css" rel="stylesheet"?>
+
+<!-- Main styles for this application -->
+<?link href="css/style.css" rel="stylesheet"?>
+
+<!-- Styles required by this views -->
+<?link href="vendors/css/daterangepicker.min.css" rel="stylesheet"?>
+<?link href="vendors/css/gauge.min.css" rel="stylesheet"?>
+<?link href="vendors/css/toastr.min.css" rel="stylesheet"?>
+
+<?init class="com.safediz.ui.filter.AuthController"?>
+
+<zk>
+	<div id="body"
+		class="app header-fixed sidebar-fixed- aside-menu-fixed aside-menu-hidden">
+		<include src="includes/header.zul" />
+		<div class="app-body">
+		<include src="includes/sidebar.zul" />
+			<!-- Main content -->
+			<div style="width: 100%;">
+				<div class="main" id="main">
+					<div id="container">
+						<div id="contents">
+							<include src="/pages/dashboard.zul" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="app-footer">
+			<!-- <include src="includes/footer.zul" /> -->
+		</div>
+
+		<html>
+			<script src="vendors/js/jquery.min.js"></script>
+			<script src="vendors/js/bootstrap.min.js"></script>
+			<script src="vendors/js/Chart.min.js"></script>
+			<script src="js/views/charts.js"></script>
+		</html>
+
+	</div>
+</zk>

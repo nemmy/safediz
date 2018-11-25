@@ -1,0 +1,128 @@
+<zk xmlns:c="client">
+	<div style="width: 100%;"
+		viewModel="@id('vm') @init('com.safediz.ui.ConfigurationViewModel')">
+		<html>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index">Home</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Administration</a>
+				</li>
+				<li class="breadcrumb-item active">Configuration</li>
+				<!-- Breadcrumb Menu-->
+				<li class="breadcrumb-menu d-md-down-none">
+					<div class="btn-group" role="group"
+						aria-label="Button group with nested dropdown">
+						<a class="btn" href="#">
+							<i class="icon-speech"></i>
+						</a>
+						<a class="btn" href="#">
+							<i class="icon-graph"></i>
+							&#160;Dashboard
+						</a>
+						<a class="btn" href="#">
+							<i class="icon-settings"></i>
+							&#160;Settings
+						</a>
+					</div>
+				</li>
+			</ol>
+		</html>
+
+		<div class="container-fluid">
+
+
+			<div class="card">
+				<div class="card-body">
+					<div class="mb-3">
+						<html>
+							<h3>System Configuration</h3>
+						</html>
+					</div>
+
+
+					<div class="input-group mb-3 sm-6">
+						<div class="input-group-prepend">
+							<span class="input-group-text mw-6">
+								Refresh Time
+							</span>
+						</div>
+						<textbox class="form-control"
+							visible="@load(not vm.configuration.editStatus)"
+							value="@bind(vm.configuration.refreshTime.name)" disabled="true"
+							placeholder="eg: 1m" />
+
+						<combobox
+							visible="@load(vm.configuration.editStatus)"
+							model="@load(vm.intervals)"
+							selectedItem="@bind(vm.configuration.refreshTime)">
+							<template name="model">
+								<comboitem label="@load(each.name)" />
+							</template>
+						</combobox>
+
+					</div>
+
+					<div class="input-group mb-3 sm-6">
+						<div class="input-group-prepend">
+							<span class="input-group-text mw-6">
+								Logs Url
+							</span>
+						</div>
+						<textbox type="text" class="form-control"
+							value="@bind(vm.configuration.logsUrl)"
+							disabled="@load(not vm.configuration.editStatus)"
+							placeholder="eg: https://splunk.com" />
+					</div>
+
+					<div class="row">
+						<div class="col-6">
+							<button type="button"
+								visible="@load(not vm.configuration.editStatus)"
+								onClick="@command('changeEditableStatus')"
+								class="btn btn-primary px-4">
+								Edit
+							</button>
+
+							<button type="button"
+								visible="@load(vm.configuration.editStatus)"
+								onClick="@command('confirm')" class="btn btn-primary px-4">
+								Save
+							</button>
+							<button type="button"
+								visible="@load(vm.configuration.editStatus)"
+								onClick="@command('confirm')" class="btn btn-primary px-4">
+								Cancel
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card"
+				viewModel="@id('vm') @init('com.safediz.ui.DeviceViewModel')">
+				<div class="card-body">
+					<div class="mb-3">
+						<html>
+							<h3>Device Icons</h3>
+						</html>
+					</div>
+
+
+					<div class="input-group mb-3 sm-12">
+						<hlayout children="@load(vm.icons)">
+							<template name="children">
+								<image style="padding: 1em; border: 1px solid #a4b7c12b; width: 80px; height: 80px;"
+									src="@load('/img/icons/'.concat(each).concat('.png'))" tooltiptext="@load(each)" />
+							</template>
+						</hlayout>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</zk>

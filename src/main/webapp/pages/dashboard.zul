@@ -1,0 +1,48 @@
+<zk xmlns:c="client">
+
+	<div
+		apply="org.zkoss.bind.BindComposer, com.safediz.ui.DashboardComposer"
+		viewModel="@id('vm') @init('com.safediz.ui.DashboardComposer')"
+		height="100%">
+
+		<div class="animated fadeIn" vflex="1">
+			<div class="card" vflex="1"
+				apply="com.safediz.ui.DeviceViewModel">
+
+				<vlayout width="100%" vflex="1"
+					style="min-height: 800px;">
+
+					<script type="text/javascript"
+						content="zk.googleAPIkey='AIzaSyBbIdmzSnlC0ye3wpunO8405YuFCDRn1pM'" />
+
+					<gmaps version="3.26" id="map"
+						children="@load(vm.selectedDevices)" lat="-1.9480402" lng="30.0612974"
+						zoom="12" hflex="1" vflex="1" showSmallCtrl="true"
+						protocol="http">
+
+						<attribute name="onMapClick">
+							if (event.getReference() instanceof org.zkoss.gmaps.Gmarker) {
+								event.getReference().setOpen(true);
+							}
+						</attribute>
+
+						<template name="children" var="device">
+							<gmarker iconImage="@load('/img/icons/'.concat(device.icon).concat('.png'))"
+								onClick="@command('openMarker', record=device)"
+								content="@load(device.name.concat(' - ').concat(device.driver))"
+								lat="@load(device.latitude)" lng="@load(device.longitude)" />
+
+						</template>
+					</gmaps>
+
+				</vlayout>
+
+				<timer id="timer" delay="@load(vm.interval.ms)"
+					repeats="true" />
+
+
+			</div>
+		</div>
+
+	</div>
+</zk>

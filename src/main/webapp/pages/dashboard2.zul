@@ -1,0 +1,270 @@
+<zk>
+	<div
+		apply="org.zkoss.bind.BindComposer, com.safediz.ui.DashboardComposer"
+		viewModel="@id('vm') @init('com.safediz.ui.DashboardComposer')">
+		<!-- Breadcrumb -->
+		<div class="breadcrumb">
+			<a class="breadcrumb-item">Home</a>
+			<a class="breadcrumb-item active">Dashboard</a>
+			<!-- Breadcrumb Menu-->
+			<a class="breadcrumb-menu d-md-down-none">
+				<div class="btn-group">
+
+					<combobox width="100%" model="@load(vm.intervals)"
+						selectedItem="@bind(vm.interval)"
+						onSelect="@command('changeInterval')">
+						<template name="model">
+							<comboitem label="@load(each.name)" />
+						</template>
+					</combobox>
+
+					<a class="btn"
+						onClick="@command('changeInterval')">
+						<span class="icon-refresh fa-2x"></span>
+					</a>
+				</div>
+			</a>
+		</div>
+
+
+
+		<div class="container-fluid"
+			apply="com.safediz.ui.PortalLayoutController">
+
+			<portallayout id="portalLayout" maximizedMode="whole">
+				<portalchildren sclass="col-md-3" id="alerts"
+					viewModel="@id('vm') @init('rw.gsb.ui.DashboardViewModel')">
+					<panel closable="true" title="Alerts"
+						sclass="card ${vm.alertTheme}" border="normal" collapsible="true">
+						<panelchildren>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="link"
+										onClick="@command('listAlertEvents')">
+										<div class="card-body">
+											<div class="h4 m-0">
+												<label
+													sclass="h1 text-danger" value="@load(vm.alerts)" />
+											</div>
+											<div>Alert Events</div>
+											
+											<div
+												class="progress progress-xs my-3">
+												<div
+													class="progress-bar bg-danger" style="width: 25%">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--/.row-->
+						</panelchildren>
+					</panel>
+				</portalchildren>
+				<portalchildren sclass="col-md-3" id="faults"
+					viewModel="@id('vm') @init('rw.gsb.ui.DashboardViewModel')">
+					<panel closable="true" title="Faults"
+						sclass="card ${vm.faultTheme}" border="normal" collapsible="true">
+						<panelchildren>
+							<div class="row">
+								<div class="col-sm-12">
+									<div
+										onClick="@command('listHospitalEvents')" class="link">
+										<div class="card-body">
+											<div class="h4 m-0">
+												<label
+													sclass="h1 text-warning"
+													value="@load(vm.faults)" />
+											</div>
+											<div>
+												Fault Events
+											</div>
+											<div
+												class="progress progress-xs my-3">
+												<div
+													class="progress-bar bg-warning" style="width: 25%">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--/.col-->
+							</div>
+							<!--/.row-->
+						</panelchildren>
+					</panel>
+				</portalchildren>
+				<portalchildren sclass="col-md-3" id="requests"
+					viewModel="@id('vm') @init('rw.gsb.ui.DashboardViewModel')">
+					<panel closable="true" title="Requests"
+						sclass="card ${vm.requestTheme}" border="normal" collapsible="true">
+						<panelchildren>
+							<div class="row">
+								<div class="col-sm-12">
+									<div
+										onClick="@command('listServiceEvents')" class="link">
+										<div class="card-body">
+											<div class="m-0">
+												<label
+													sclass="h1 text-success"
+													value="@load(vm.requests)" />
+											</div>
+											<div>Service Events</div>
+											<div
+												class="progress progress-xs my-3">
+												<div
+													class="progress-bar bg-success" style="width: 25%">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</panelchildren>
+					</panel>
+				</portalchildren>
+
+				<portalchildren sclass="col-md-3" id="audit"
+					viewModel="@id('vm') @init('rw.gsb.ui.DashboardViewModel')">
+					<panel closable="true" title="Audit Events"
+						sclass="card ${vm.auditTheme}" border="normal" collapsible="true">
+						<panelchildren>
+							<div class="row">
+								<!--/.col-->
+								<div class="col-sm-12">
+									<div
+										onClick="@command('listAuditEvents')" class="link">
+										<div class="card-body">
+											<div class="h4 m-0">
+												<label
+													sclass="h1 text-info" value="@load(vm.audits)" />
+											</div>
+											<div>Audit Events</div>
+											<div
+												class="progress progress-xs my-3">
+												<div
+													class="progress-bar bg-info" style="width: 25%">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</panelchildren>
+					</panel>
+				</portalchildren>
+
+
+				<portalchildren sclass="col-md-4">
+					<panel closable="true" title="Inbound" sclass="card"
+						collapsible="true">
+						<panelchildren>
+							<div class="row">
+								<div class="col-md-12">
+
+									<div class="chart-wrapper">
+										<html>
+											<iframe
+												src="https://snapshot.raintank.io/dashboard-solo/snapshot/UIQl9pN5xBth2tOFjnu8XYNdXWUHsn6J?orgId=2&amp;panelId=2&amp;from=1538344800000&amp;to=1540294848957&amp;theme=light"
+												width="100%" height="200" frameborder="0">
+											</iframe>
+										</html>
+									</div>
+
+								</div>
+							</div>
+							<!--/.row-->
+						</panelchildren>
+					</panel>
+				</portalchildren>
+
+				<portalchildren sclass="col-md-4">
+					<panel closable="true" title="Outbound" sclass="card"
+						collapsible="true">
+						<panelchildren>
+							<div class="row">
+								<div class="col-md-12">
+
+									<div class="chart-wrapper">
+										<html>
+											<iframe
+												src="https://snapshot.raintank.io/dashboard-solo/snapshot/n3ahBXT6Gdyu0C2Q8SZTEmPzhJ5cGQZ7?orgId=2&amp;from=1538344800000&amp;to=1540299878746&amp;panelId=2&amp;theme=light"
+												width="100%" height="200" frameborder="0">
+											</iframe>
+										</html>
+									</div>
+
+								</div>
+							</div>
+							<!--/.row-->
+						</panelchildren>
+					</panel>
+				</portalchildren>
+
+				<portalchildren sclass="col-md-4">
+					<panel closable="true" title="Faults" sclass="card"
+						collapsible="true">
+						<panelchildren>
+							<div class="row">
+								<div class="col-md-12">
+
+									<div class="chart-wrapper">
+										<html>
+											<iframe
+												src="https://snapshot.raintank.io/dashboard-solo/snapshot/4MUHwVk0PhcdELxnlEbKKbHLBuKLxYiR?orgId=2&amp;panelId=2&amp;from=1538344800000&amp;to=1540299999717&amp;theme=light"
+												width="100%" height="200" frameborder="0">
+											</iframe>
+										</html>
+									</div>
+
+								</div>
+							</div>
+						</panelchildren>
+					</panel>
+				</portalchildren>
+
+
+				<!-- Hardware -->
+				<portalchildren sclass="col-md-3">
+					<panel closable="true" title="Tomcat Server"
+						sclass="card" border="normal" collapsible="true">
+						<panelchildren>
+
+						</panelchildren>
+					</panel>
+				</portalchildren>
+				<portalchildren sclass="col-md-3">
+					<panel closable="true" title="XAP Server"
+						sclass="card" border="normal" collapsible="true">
+						<panelchildren>
+
+						</panelchildren>
+					</panel>
+				</portalchildren>
+				<portalchildren sclass="col-md-3">
+					<panel closable="true" title="PostgreSQL Server"
+						sclass="card" border="normal" collapsible="true">
+						<panelchildren>
+
+						</panelchildren>
+					</panel>
+				</portalchildren>
+				<portalchildren sclass="col-md-3">
+					<panel closable="true" title="Rabbit MQ Server"
+						sclass="card" border="normal" collapsible="true">
+						<panelchildren>
+
+						</panelchildren>
+					</panel>
+				</portalchildren>
+
+			</portallayout>
+
+		</div>
+
+		<!-- refresh content every configured milli seconds -->
+		<timer id="timer" delay="@load(vm.interval.ms)" repeats="true" />
+
+	</div>
+</zk>

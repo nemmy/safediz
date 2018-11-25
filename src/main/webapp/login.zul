@@ -1,0 +1,141 @@
+<!--
+	* SAFE DIZ :: Vehicle Tracking System
+	* @version v1.0
+	* Copyright (c) 2018 Emmanuel NSHIMIYIMANA
+-->
+
+
+<?meta charset="utf-8"?>
+<?meta http-equiv="X-UA-Compatible" content="IE=edge"?>
+<?meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"?>
+<?meta name="description" content="Alba - Bootstrap 4 Admin Template"?>
+<?meta name="author" content="Emmanuel NSHIMIYIMANA | nemmy05@gmail.com | +250788795364"?>
+<?meta name="keyword"
+	content="Rwanda, Dashboard"?>
+<?link rel="shortcut icon" href="img/favicon.ico"?>
+<?page title="SAFE DIZ :: Vehicle Tracking System"?>
+
+<!-- Icons -->
+<?link href="vendors/css/flag-icon.min.css" rel="stylesheet"?>
+<?link href="vendors/css/font-awesome.min.css" rel="stylesheet"?>
+<?link href="vendors/css/simple-line-icons.min.css" rel="stylesheet"?>
+
+<!-- Main styles for this application -->
+<?link href="css/style.css" rel="stylesheet"?>
+
+<!-- Styles required by this views -->
+<?link href="vendors/css/daterangepicker.min.css" rel="stylesheet"?>
+<?link href="vendors/css/gauge.min.css" rel="stylesheet"?>
+<?link href="vendors/css/toastr.min.css" rel="stylesheet"?>
+
+<zk>
+
+	<div id="body" class="app app-home flex-row align-items-center"
+		apply="org.zkoss.bind.BindComposer, com.safediz.ui.utils.MenuItemRenderer"
+		viewModel="@id('vm') @init('com.safediz.ui.utils.MenuItemRenderer')">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8">
+					<div class="card-group">
+						<div class="card p-4">
+							<div class="card-body">
+								<html class="text-center">
+									<h1 class="text-center mb-3">
+										SAFE DIZ
+									</h1>
+									<p class="text-muted">
+										Sign In to your account
+									</p>
+								</html>
+								<div class="input-group mb-3">
+									<div
+										visible="@load(vm.errorMessage ne null)"
+										class="p-2 full-width alert alert-danger alert-dismissible fade show">
+										<label
+											value="@load(vm.errorMessage)" />
+										<html>
+											<button type="button"
+												class="close" data-dismiss="alert" aria-label="Close">
+												<span class="fa fa-times"
+													aria-hidden="true">
+												</span>
+											</button>
+										</html>
+									</div>
+								</div>
+
+								<div class="input-group mb-3">
+									<div class="input-group-prepend">
+										<span
+											class="input-group-text">
+											<span class="icon-user"></span>
+										</span>
+									</div>
+									<textbox type="text"
+										value="@bind(vm.username)" class="form-control"
+										placeholder="Username" />
+								</div>
+								<div class="input-group mb-4">
+									<div class="input-group-prepend">
+										<span
+											class="input-group-text">
+											<span class="icon-lock"></span>
+										</span>
+									</div>
+									<textbox type="password"
+										value="@bind(vm.pwd)" class="form-control"
+										placeholder="Password" />
+								</div>
+								<div class="row">
+									<div class="col-6">
+										<button type="button"
+											onClick="@command('login')" class="btn btn-primary px-4">
+											Login
+										</button>
+									</div>
+									<div class="col-6 text-right">
+										<button type="button"
+											class="btn btn-link px-0">
+											Forgot password?
+										</button>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div
+							class="card text-white bg-primary py-5 d-md-down-none"
+							style="width:44%">
+							<div class="card-body text-center">
+								<div>
+									<html>
+										<h2>Sign up</h2>
+										<p>
+											Lorem ipsum dolor sit amet,
+											consectetur adipisicing
+											elit, sed do eiusmod tempor
+											incididunt ut labore et
+											dolore magna aliqua.
+										</p>
+									</html>
+									<button type="button"
+										href="register" class="btn btn-primary active mt-3">
+										Register Now!
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<html>
+			<script src="vendors/js/jquery.min.js"></script>
+			<script src="vendors/js/popper.min.js"></script>
+			<script src="vendors/js/bootstrap.min.js"></script>
+		</html>
+
+	</div>
+</zk>

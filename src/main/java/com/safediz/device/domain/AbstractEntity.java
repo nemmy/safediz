@@ -39,6 +39,4 @@ public abstract class AbstractEntity extends GuidDomainBo {
 		this.id = id;
 	}
 	
-	
-	
 }

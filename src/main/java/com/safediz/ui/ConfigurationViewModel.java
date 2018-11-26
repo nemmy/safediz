@@ -10,8 +10,8 @@ import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.ListModelList;
 
-import com.safediz.security.Configuration;
-import com.safediz.security.service.ISecurityService;
+import com.safediz.security.domain.Configuration;
+import com.safediz.security.domain.service.ISecurityService;
 import com.safediz.util.EINterval;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)

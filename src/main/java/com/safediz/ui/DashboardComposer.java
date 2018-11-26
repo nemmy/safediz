@@ -19,8 +19,8 @@ import org.zkoss.zul.ListModelList;
 
 import com.safediz.device.domain.Device;
 import com.safediz.device.service.ISpaceDeviceService;
-import com.safediz.security.Configuration;
-import com.safediz.security.service.ISecurityService;
+import com.safediz.security.domain.Configuration;
+import com.safediz.security.domain.service.ISecurityService;
 import com.safediz.ui.utils.MessageUtil;
 import com.safediz.util.EINterval;
 

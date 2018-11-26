@@ -15,7 +15,7 @@ import org.openspaces.spatial.shapes.Point;
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceExclude;
 import com.safediz.device.dao.IDeviceDao;
-import com.safediz.security.User;
+import com.safediz.security.domain.User;
 
 @SpaceClass(persist = true)
 @Entity

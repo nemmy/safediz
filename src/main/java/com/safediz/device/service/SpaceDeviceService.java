@@ -14,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.j_spaces.core.client.SQLQuery;
 import com.safediz.device.dao.IDeviceDao;
 import com.safediz.device.domain.Device;
+import com.safediz.security.domain.User;
+import com.safediz.security.domain.dao.IUserDao;
 
 @Service(ISpaceDeviceService.NAME)
 @Transactional
@@ -24,6 +26,9 @@ public class SpaceDeviceService implements ISpaceDeviceService {
 
 	@Autowired
 	private IDeviceDao deviceDao;
+
+	@Autowired
+	private IUserDao userDao;
 
 	@Override
 	public void saveDevice(Device device) {
@@ -47,14 +52,24 @@ public class SpaceDeviceService implements ISpaceDeviceService {
 	}
 
 	@Override
-	public void deleteDevice(Device party) {
-		dataSpace.clear(party);
+	public void deleteDevice(Device device) {
+		deviceDao.deleteDevice(device);
+		dataSpace.clear(device);
 	}
 
 	@PostConstruct
 	public void init() {
+		
 		// load data from db into space
+		List<User> allUsers = userDao.findAll();
+		if (!allUsers.isEmpty()) {
+			dataSpace.writeMultiple(allUsers.toArray());
+		}
+
 		List<Device> allDevices = deviceDao.findAll();
-		dataSpace.writeMultiple(allDevices.toArray());
+		if (!allDevices.isEmpty()) {
+			dataSpace.writeMultiple(allDevices.toArray());
+		}
+
 	}
 }

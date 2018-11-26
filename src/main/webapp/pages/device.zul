@@ -1,0 +1,110 @@
+<zk xmlns:c="client">
+	<div style="width: 100%;"
+		viewModel="@id('vm') @init('com.safediz.ui.DeviceViewModel')">
+		<html>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index">Home</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Administration</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">User</a>
+				</li>
+				<li class="breadcrumb-item active">Devices</li>
+				<!-- Breadcrumb Menu-->
+				<li class="breadcrumb-menu d-md-down-none">
+					<div class="btn-group" role="group"
+						aria-label="Button group with nested dropdown">
+						<a class="btn" href="#">
+							<i class="icon-speech"></i>
+						</a>
+						<a class="btn" href="#">
+							<i class="icon-graph"></i>
+							&#160;Dashboard
+						</a>
+						<a class="btn" href="#">
+							<i class="icon-settings"></i>
+							&#160;Settings
+						</a>
+					</div>
+				</li>
+			</ol>
+		</html>
+
+		<div class="container-fluid">
+
+			<div class="animated fadeIn">
+				<div class="card">
+					<div class="card-body">
+
+						<radiogroup id="rg"
+							selectedItem="@bind(vm.icon)" />
+
+						<div class="row">
+
+							<div class="form-group col-6">
+								<label>Device Name</label>
+								<textbox sclass="form-control"
+									value="@bind(vm.selectedDevice.name)" />
+							</div>
+
+							<div class="form-group col-6">
+								<label>IMEI Number</label>
+								<textbox sclass="form-control"
+									value="@bind(vm.selectedDevice.imeiNumber)" />
+							</div>
+
+							<div class="form-group col-6">
+								<label>Password</label>
+								<textbox sclass="form-control"
+									type="password" value="@bind(vm.selectedDevice.password)" />
+							</div>
+
+							<div class="form-group col-6">
+								<label>Driver Name</label>
+								<textbox sclass="form-control"
+									value="@bind(vm.selectedDevice.driver)" />
+							</div>
+
+							<div class="form-group col-6">
+								<label>Latitude</label>
+								<doublebox sclass="form-control"
+									value="@bind(vm.selectedDevice.latitude)" />
+							</div>
+							<div class="form-group col-6">
+								<label>Longitute</label>
+								<doublebox sclass="form-control"
+									value="@bind(vm.selectedDevice.longitude)" />
+							</div>
+							<div class="form-group col-12">
+								<label>Device Icon</label>
+								<hlayout children="@load(vm.icons)">
+									<template name="children">
+										<radio
+											image="@load('/img/icons/'.concat(each).concat('.png'))"
+											value="@load(each)" radiogroup="rg" />
+									</template>
+								</hlayout>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-12">
+								<div sclass="pull-left">
+									<button sclass="btn btn-primary"
+										label="Save" onClick="@command('confirm')" />
+
+									<button sclass="btn btn-default"
+										label="Cancel" onClick="@command('onCancel')" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</zk>

@@ -12,10 +12,10 @@ import org.zkoss.bind.annotation.NotifyChange;
 import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 
-import com.safediz.security.EUserRole;
-import com.safediz.security.EUserStatus;
-import com.safediz.security.User;
-import com.safediz.security.service.ISecurityService;
+import com.safediz.security.domain.EUserRole;
+import com.safediz.security.domain.EUserStatus;
+import com.safediz.security.domain.User;
+import com.safediz.security.domain.service.ISecurityService;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class RegisterViewModel extends ViewModelHelper {

@@ -13,8 +13,8 @@ import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Div;
 import org.zkoss.zul.Window;
 
-import com.safediz.security.User;
-import com.safediz.security.service.ISecurityService;
+import com.safediz.security.domain.User;
+import com.safediz.security.domain.service.ISecurityService;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class ChangeUserPasswordViewModel extends ViewModelHelper {

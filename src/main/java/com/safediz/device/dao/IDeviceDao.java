@@ -23,5 +23,7 @@ public interface IDeviceDao extends IGuidDao<Device> {
 
 	public abstract List<Device> findAll();
 
+	public abstract void deleteDevice(Device device);
+
 }
 

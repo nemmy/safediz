@@ -13,7 +13,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.safediz.security.service.IShiroLoginService;
+import com.safediz.security.domain.service.IShiroLoginService;
 
 @Transactional
 public class AuthRealm extends AuthorizingRealm {

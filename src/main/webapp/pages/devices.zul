@@ -1,6 +1,6 @@
 <zk xmlns:c="client">
 	<div style="width: 100%;"
-		viewModel="@id('vm') @init('com.safediz.ui.DeviceViewModel')">
+		viewModel="@id('vm') @init('com.safediz.ui.DeviceListViewModel')">
 		<html>
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item">

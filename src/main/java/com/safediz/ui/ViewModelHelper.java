@@ -1,5 +1,9 @@
 package com.safediz.ui;
 
+import java.net.InetAddress;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.zkoss.bind.annotation.Init;
@@ -8,8 +12,10 @@ import org.zkoss.zk.ui.select.annotation.VariableResolver;
 import org.zkoss.zk.ui.select.annotation.WireVariable;
 import org.zkoss.zul.Div;
 
-import com.safediz.security.User;
-import com.safediz.security.service.ISecurityService;
+import com.safediz.device.domain.GeoLocation;
+import com.safediz.device.service.GeoIPv4;
+import com.safediz.security.domain.User;
+import com.safediz.security.domain.service.ISecurityService;
 import com.safediz.ui.utils.AbstractVM;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
@@ -50,6 +56,28 @@ public class ViewModelHelper extends AbstractVM {
 		Div div = (Div) Path.getComponent("/contents");
 		div.getChildren().clear();
 		return div;
+	}
+	
+	protected GeoLocation findCurrentLocation(String hostname) {
+		GeoLocation location = null;
+		try {
+			InetAddress ip = null;
+			if (hostname != null) {
+				ip = InetAddress.getByName(hostname);
+			} else {
+				ip = InetAddress.getLocalHost();
+			}
+			location = GeoIPv4.getLocation(ip);
+		} catch (Exception e) {
+			location = findCurrentLocation("gov.rw");
+		}
+		return location;
+
+	}
+	
+	public List<String> getIcons() {
+		return Arrays.asList("ambulance", "big-truck", "bus", "cabriolet", "lorry-green", "lorry", "mini-bus", "pickup",
+				"police", "sportcar", "taxi", "truck", "voiture");
 	}
 
 	public String getTheme() {

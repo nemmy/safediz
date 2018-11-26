@@ -12,6 +12,8 @@
     http://www.openspaces.org/schema/remoting http://www.openspaces.org/schema/11.0/remoting/openspaces-remoting.xsd">
 
 	<context:annotation-config />
+	
+	<tx:annotation-driven />
 
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

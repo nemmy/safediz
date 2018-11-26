@@ -28,7 +28,7 @@ public class Device extends AbstractEntity {
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
-	@Column(name = "IMEI_NUMBER", nullable = true)
+	@Column(name = "IMEI_NUMBER", nullable = false)
 	private String imeiNumber;
 
 	@Column(name = "DRIVER", nullable = true)

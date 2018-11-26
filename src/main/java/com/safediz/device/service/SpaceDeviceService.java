@@ -9,12 +9,14 @@ import javax.annotation.PostConstruct;
 import org.openspaces.core.GigaSpace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.j_spaces.core.client.SQLQuery;
 import com.safediz.device.dao.IDeviceDao;
 import com.safediz.device.domain.Device;
 
 @Service(ISpaceDeviceService.NAME)
+@Transactional
 public class SpaceDeviceService implements ISpaceDeviceService {
 
 	@Autowired
@@ -49,7 +51,7 @@ public class SpaceDeviceService implements ISpaceDeviceService {
 		dataSpace.clear(party);
 	}
 
-//	@PostConstruct
+	@PostConstruct
 	public void init() {
 		// load data from db into space
 		List<Device> allDevices = deviceDao.findAll();

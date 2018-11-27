@@ -22,8 +22,9 @@ import com.safediz.device.domain.Device;
 import com.safediz.device.domain.GeoLocation;
 import com.safediz.device.service.ISpaceDeviceService;
 import com.safediz.security.domain.Configuration;
+import com.safediz.security.domain.User;
 import com.safediz.security.domain.service.ISecurityService;
-import com.safediz.util.EINterval;
+import com.safediz.ui.utils.EINterval;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class DeviceListViewModel extends ViewModelHelper {
@@ -53,7 +54,10 @@ public class DeviceListViewModel extends ViewModelHelper {
 			this.interval = configuration.getRefreshTime();
 		}
 
-		this.records = registryService.findAllDevices();
+		User user = getLoggedUser();
+		if (user != null) {
+			this.records = registryService.findUserDevices(user);
+		}
 
 		currentLocation = findCurrentLocation("minecofin.gov.rw");
 	}
@@ -63,7 +67,7 @@ public class DeviceListViewModel extends ViewModelHelper {
 	public void onAddNew() {
 		Device record = new Device();
 		record.setEditStatus(true);
-		record.setOwner(getCurrentUser());
+		record.setOwner(getLoggedUser());
 		if (currentLocation != null) {
 			record.setLatitude(currentLocation.getLatitude());
 			record.setLongitude(currentLocation.getLongitude());
@@ -74,13 +78,21 @@ public class DeviceListViewModel extends ViewModelHelper {
 		map.put("record", record);
 		Executions.createComponents("pages/device.zul", div, map);
 	}
-	
+
 	@Command
 	public void onEdit(@BindingParam("record") final Device record) {
 		Div div = getParentWindow();
 		Map<String, Object> map = new HashMap<>();
 		map.put("record", record);
 		Executions.createComponents("pages/device.zul", div, map);
+	}
+	
+	@Command
+	public void onHistory(@BindingParam("record") final Device record) {
+		Div div = getParentWindow();
+		Map<String, Object> map = new HashMap<>();
+		map.put("record", record);
+		Executions.createComponents("pages/deviceHistory.zul", div, map);
 	}
 
 	public void refreshRowTemplate(final Device refreshedRow) {
@@ -93,8 +105,8 @@ public class DeviceListViewModel extends ViewModelHelper {
 
 		if (device != null) {
 			device.setEditStatus(!device.isEditStatus());
-			if (device.getId() == null) {
-				device.setId(UUID.randomUUID());
+			if (device.getGuid() == null) {
+				device.setGuid(UUID.randomUUID());
 			}
 
 			if (icon != null) {
@@ -120,7 +132,7 @@ public class DeviceListViewModel extends ViewModelHelper {
 	@Command
 	@NotifyChange({ "records", "editable" })
 	public void changeEditableStatus(@BindingParam("record") final Device party) {
-		if (party.getId() == null) {
+		if (party.getGuid() == null) {
 			records.remove(0);
 		} else {
 			party.setEditStatus(!party.isEditStatus());

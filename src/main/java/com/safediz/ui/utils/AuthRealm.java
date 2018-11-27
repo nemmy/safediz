@@ -1,4 +1,4 @@
-package com.safediz.util;
+package com.safediz.ui.utils;
 
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;

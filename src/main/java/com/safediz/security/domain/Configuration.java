@@ -7,7 +7,7 @@ import javax.persistence.Transient;
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceExclude;
 import com.gigaspaces.annotation.pojo.SpaceId;
-import com.safediz.util.EINterval;
+import com.safediz.ui.utils.EINterval;
 
 @SpaceClass
 public class Configuration {

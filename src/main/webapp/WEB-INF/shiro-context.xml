@@ -10,7 +10,7 @@
 
 	<!-- Define the realm you want to use to connect to your back-end security 
 		datasource: -->
-	<bean id="authRealm" class="com.safediz.util.AuthRealm" />
+	<bean id="authRealm" class="com.safediz.ui.utils.AuthRealm" />
 
 	<bean id="sessionIdGenerator"
 		class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />

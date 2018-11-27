@@ -2,8 +2,10 @@ package com.safediz.ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import org.zkoss.bind.annotation.BindingParam;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.Init;
 import org.zkoss.bind.annotation.NotifyChange;
@@ -18,11 +20,16 @@ import org.zkoss.zul.Div;
 import org.zkoss.zul.ListModelList;
 
 import com.safediz.device.domain.Device;
+import com.safediz.device.domain.DeviceHistory;
 import com.safediz.device.service.ISpaceDeviceService;
 import com.safediz.security.domain.Configuration;
+import com.safediz.security.domain.User;
 import com.safediz.security.domain.service.ISecurityService;
+import com.safediz.ui.utils.EINterval;
 import com.safediz.ui.utils.MessageUtil;
-import com.safediz.util.EINterval;
+
+import rw.gov.spring.SpringService;
+import rw.gov.util.DateTimeUtil;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class DashboardComposer extends GenericForwardComposer<Component> {
@@ -33,7 +40,7 @@ public class DashboardComposer extends GenericForwardComposer<Component> {
 	private ISecurityService securityService;
 
 	@WireVariable(ISpaceDeviceService.NAME)
-	private ISpaceDeviceService registryService;
+	private ISpaceDeviceService deviceService;
 
 	private Configuration configuration;
 
@@ -50,9 +57,25 @@ public class DashboardComposer extends GenericForwardComposer<Component> {
 			this.interval = configuration.getRefreshTime();
 		}
 
-		this.records = registryService.findAllDevices();
+		User user = getLoggedUser();
+		if (user != null) {
+			this.records = deviceService.findUserDevices(user);
+		}
 
 		this.selectedDevices = records;
+	}
+
+	public User getLoggedUser() {
+		User user = null;
+		try {
+			Subject currentSubject = SecurityUtils.getSubject();
+			String username = currentSubject.getPrincipal().toString();
+			if (currentSubject.isAuthenticated() && !"root".equals(username)) {
+				user = securityService.findUser(username);
+			}
+		} catch (Exception e) {
+		}
+		return user;
 	}
 
 	@NotifyChange("selectedDevices")
@@ -66,6 +89,19 @@ public class DashboardComposer extends GenericForwardComposer<Component> {
 	}
 
 	public void onTimer$timer(Event e) {
+		// record history for all devices
+		deviceService = SpringService.getInstance().getObjectForExceptionService(ISpaceDeviceService.class);
+		List<Device> allDevices = deviceService.findAllDevices();
+		for (Device device : allDevices) {
+			DeviceHistory dh = new DeviceHistory();
+			dh.setTime(DateTimeUtil.currentTimestamp());
+			dh.setDevice(device);
+			dh.setLatitude(device.getLatitude());
+			dh.setLongitude(device.getLongitude());
+
+			deviceService.saveDeviceHistory(dh);
+		}
+
 		Div div = (Div) Path.getComponent("/contents");
 		div.getChildren().clear();
 		Executions.createComponents("pages/dashboard.zul", div, null);

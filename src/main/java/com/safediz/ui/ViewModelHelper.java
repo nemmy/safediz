@@ -43,13 +43,22 @@ public class ViewModelHelper extends AbstractVM {
 	@Init
 	public void init() {
 		try {
+			setCurrentUser(getLoggedUser());
+		} catch (Exception e) {
+		}
+	}
+
+	public User getLoggedUser() {
+		User user = null;
+		try {
 			Subject currentSubject = SecurityUtils.getSubject();
 			String username = currentSubject.getPrincipal().toString();
 			if (currentSubject.isAuthenticated() && !"root".equals(username)) {
-				currentUser = securityService.findUser(username);
+				user = securityService.findUser(username);
 			}
 		} catch (Exception e) {
 		}
+		return user;
 	}
 
 	protected Div getParentWindow() {
@@ -57,7 +66,7 @@ public class ViewModelHelper extends AbstractVM {
 		div.getChildren().clear();
 		return div;
 	}
-	
+
 	protected GeoLocation findCurrentLocation(String hostname) {
 		GeoLocation location = null;
 		try {
@@ -74,7 +83,7 @@ public class ViewModelHelper extends AbstractVM {
 		return location;
 
 	}
-	
+
 	public List<String> getIcons() {
 		return Arrays.asList("ambulance", "big-truck", "bus", "cabriolet", "lorry-green", "lorry", "mini-bus", "pickup",
 				"police", "sportcar", "taxi", "truck", "voiture");
@@ -113,7 +122,7 @@ public class ViewModelHelper extends AbstractVM {
 	}
 
 	public User getCurrentUser() {
-		init();
+		currentUser = getLoggedUser();
 		return currentUser;
 	}
 

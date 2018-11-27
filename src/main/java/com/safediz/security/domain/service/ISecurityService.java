@@ -13,6 +13,8 @@ public interface ISecurityService {
 	
 	void saveUser(User user, String password);
 	
+	void changeUserPassword(User user, String pwd);
+
 	void deleteUser(User user);
 	
 	void saveConfiguration(Configuration configuration);

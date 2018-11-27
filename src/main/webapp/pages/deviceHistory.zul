@@ -1,0 +1,82 @@
+<zk xmlns:c="client">
+	<div style="width: 100%;"
+		viewModel="@id('vm') @init('com.safediz.ui.DeviceHistoryViewModel')">
+		<html>
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item">
+					<a href="index">Home</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Administration</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">User</a>
+				</li>
+				<li class="breadcrumb-item">
+					<a href="#">Devices</a>
+				</li>
+				<li class="breadcrumb-item active">Device History</li>
+			</ol>
+		</html>
+
+		<div class="container-fluid">
+
+			<div class="animated fadeIn">
+				<div class="card">
+					<div class="card-body">
+						<div sclass="row">
+							<div class="form-group col-sm-4">
+								<textbox sclass="form-control"
+									placeholder="Search" />
+							</div>
+							<div class="form-group col-sm-4">
+								<datebox />
+								<datebox />
+							</div>
+						</div>
+
+						<grid model="@load(vm.deviceHistories)"
+							mold="paging" pageSize="10" class="table-bordered form-group">
+							<columns>
+								<column label="#" width="4%" />
+								<column label="Time" width="15%" />
+								<column label="Device" />
+								<column label="IMEI Number" />
+								<column label="Latitude" />
+								<column label="Longitude" />
+							</columns>
+							<rows>
+								<template name="model">
+									<row>
+										<label
+											style="text-align: center;"
+											value="${forEachStatus.index + 1}" />
+										<label value="@load(each.time)" />
+										<label
+											value="@load(each.device.name)" />
+										<label
+											value="@load(each.imeiNumber)" />
+										<label
+											value="@load(each.latitude)" />
+										<label
+											value="@load(each.longitude)" />
+									</row>
+								</template>
+							</rows>
+						</grid>
+
+						<div sclass="row">
+							<div sclass="col-sm-12">
+								<button iconSclass="fa fa-arrow-left"
+									label="Back" sclass="btn btn-default pull-right"
+									onClick="@command('onCancel')" />
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</zk>

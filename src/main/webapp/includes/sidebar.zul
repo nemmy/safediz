@@ -1,5 +1,5 @@
 <zk>
-	<window mode="popup" position="left,bottom"
+	<window mode="overlapped" position="left,bottom"
 		style="bottom: 50;    border-bottom: 1px solid #eff3f5;">
 		<div class="sidebar"
 			viewModel="@id('vm') @init('com.safediz.ui.DashboardComposer')">
@@ -18,11 +18,11 @@
 				<listbox model="@load(vm.records)" checkmark="true" disabled="true" onSelect="@command('onSelectDevice')"
 					selectedItems="@load(vm.selectedDevices)" multiple="true">
 					<listhead>
-						<listheader hflex="2" />
-						<listheader hflex="3" />
-						<listheader hflex="4" />
-						<listheader hflex="4" />
-						<listheader hflex="6" />
+						<listheader width="8%" />
+						<listheader width="15%" />
+						<listheader width="15%" />
+						<listheader width="22%" />
+						<listheader  />
 					</listhead>
 					<template name="model">
 						<listitem>

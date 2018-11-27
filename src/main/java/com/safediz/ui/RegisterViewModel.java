@@ -51,8 +51,8 @@ public class RegisterViewModel extends ViewModelHelper {
 				message = null;
 			} else {
 				user.setEditStatus(!user.isEditStatus());
-				if (user.getId() == null) {
-					user.setId(UUID.randomUUID());
+				if (user.getGuid() == null) {
+					user.setGuid(UUID.randomUUID());
 				}
 				securityService.saveUser(user, user.getPassword());
 				refreshRowTemplate(user);

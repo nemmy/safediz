@@ -13,23 +13,6 @@
 					<a href="#">User</a>
 				</li>
 				<li class="breadcrumb-item active">Devices</li>
-				<!-- Breadcrumb Menu-->
-				<li class="breadcrumb-menu d-md-down-none">
-					<div class="btn-group" role="group"
-						aria-label="Button group with nested dropdown">
-						<a class="btn" href="#">
-							<i class="icon-speech"></i>
-						</a>
-						<a class="btn" href="#">
-							<i class="icon-graph"></i>
-							&#160;Dashboard
-						</a>
-						<a class="btn" href="#">
-							<i class="icon-settings"></i>
-							&#160;Settings
-						</a>
-					</div>
-				</li>
 			</ol>
 		</html>
 
@@ -61,50 +44,14 @@
 								<column label="#" width="4%" />
 								<column label="Name" />
 								<column label="IMEI Number" />
-								<column label="Password" />
-								<column label="Driver" />
-								<column label="Icon" />
+								<column label="Phone Number" />
+								<column label="Driver" width="15%" />
+								<column label="Icon" width="5%" />
 								<column label="Latitude" />
 								<column label="Longitude" />
-								<column label="Actions" width="6%" />
+								<column label="Actions" width="10%"/>
 							</columns>
 							<rows>
-								<template name="noneditable">
-									<row>
-										<label
-											style="text-align: center;"
-											value="${forEachStatus.index + 1}" />
-										<label value="@load(each.name)" />
-										<label
-											value="@load(each.imeiNumber)" />
-										<textbox type="password"
-											sclass="form-control" readonly="true"
-											value="@load(each.password)" />
-										<label
-											value="@load(each.driver)" />
-										<image
-											src="@load('/img/icons/'.concat(each.icon).concat('.png'))" />
-										<label
-											value="@load(each.latitude)" />
-										<label
-											value="@load(each.longitude)" />
-
-										<div sclass="pull-right">
-											<a sclass="icon"
-												disabled="@load(!vm.editable)"
-												tooltiptext=" Update [ ${each.name } ]"
-												iconSclass="fa fa-pencil fa-color-change"
-												onClick="@command('changeEditableStatus', record=each )" />
-
-											<a sclass="icon"
-												disabled="@load(!vm.editable)"
-												tooltiptext=" Delete [ ${each.name } ]"
-												iconSclass="fa fa-trash-o fa-color-danger"
-												onClick="@command('onRemove', record=each )" />
-										</div>
-									</row>
-								</template>
-
 								<template name="editable">
 									<row>
 										<label
@@ -115,7 +62,7 @@
 										<textbox sclass="form-control"
 											value="@bind(each.imeiNumber)" />
 										<textbox sclass="form-control"
-											type="password" value="@bind(each.password)" />
+											value="@bind(each.phoneNumber)" />
 										<textbox sclass="form-control"
 											value="@bind(each.driver)" />
 
@@ -144,6 +91,50 @@
 										</div>
 									</row>
 								</template>
+								<template name="noneditable">
+									<row>
+										<label
+											style="text-align: center;"
+											value="${forEachStatus.index + 1}" />
+										<label value="@load(each.name)" />
+										<label
+											value="@load(each.imeiNumber)" />
+										<label
+											value="@load(each.phoneNumber)" />
+										<label
+											value="@load(each.driver)" />
+										<div align="center">
+											<image
+												src="@load('/img/icons/'.concat(each.icon).concat('.png'))" />
+										</div>
+										<label
+											value="@load(each.latitude)" />
+										<label
+											value="@load(each.longitude)" />
+
+										<div sclass="pull-right">
+											<a sclass="icon"
+												disabled="@load(!vm.editable)"
+												tooltiptext=" Update [ ${each.name } ]"
+												iconSclass="fa fa-pencil fa-color-change"
+												onClick="@command('onEdit', record=each )" />
+
+											<a sclass="icon"
+												disabled="@load(!vm.editable)"
+												tooltiptext=" Delete [ ${each.name } ]"
+												iconSclass="fa fa-trash-o fa-color-danger"
+												onClick="@command('onRemove', record=each )" />
+
+											<a sclass="icon"
+												disabled="@load(!vm.editable)"
+												tooltiptext="View History [ ${each.name } ]"
+												iconSclass="fa fa-history fa-color-success"
+												onClick="@command('onHistory', record=each )" />
+										</div>
+									</row>
+								</template>
+
+
 							</rows>
 						</grid>
 

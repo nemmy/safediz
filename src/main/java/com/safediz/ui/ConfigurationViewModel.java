@@ -12,7 +12,7 @@ import org.zkoss.zul.ListModelList;
 
 import com.safediz.security.domain.Configuration;
 import com.safediz.security.domain.service.ISecurityService;
-import com.safediz.util.EINterval;
+import com.safediz.ui.utils.EINterval;
 
 @VariableResolver(org.zkoss.zkplus.spring.DelegatingVariableResolver.class)
 public class ConfigurationViewModel extends ViewModelHelper {

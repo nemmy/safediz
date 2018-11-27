@@ -1,7 +1,5 @@
 package com.safediz.ui;
 
-import java.util.UUID;
-
 import org.zkoss.bind.annotation.Command;
 import org.zkoss.bind.annotation.ExecutionArgParam;
 import org.zkoss.bind.annotation.Init;
@@ -51,10 +49,7 @@ public class ChangeUserPasswordViewModel extends ViewModelHelper {
 				message = null;
 			} else {
 				user.setEditStatus(!user.isEditStatus());
-				if (user.getId() == null) {
-					user.setId(UUID.randomUUID());
-				}
-				securityService.saveUser(user, pwd);
+				securityService.changeUserPassword(user, pwd);
 				// send welcome email
 				message = "Password successful changed. The user can use the new password";
 

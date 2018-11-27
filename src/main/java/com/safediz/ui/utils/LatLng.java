@@ -1,4 +1,4 @@
-package com.safediz.util;
+package com.safediz.ui.utils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

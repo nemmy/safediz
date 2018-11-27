@@ -1,12 +1,14 @@
 package com.safediz.device.domain;
 
+import java.sql.Timestamp;
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.openspaces.spatial.ShapeFactory;
 import org.openspaces.spatial.shapes.Point;
@@ -15,59 +17,49 @@ import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceExclude;
 import com.gigaspaces.annotation.pojo.SpaceId;
 import com.gigaspaces.annotation.pojo.SpaceIndex;
-import com.safediz.device.dao.IDeviceDao;
-import com.safediz.security.domain.User;
+import com.safediz.device.dao.IDeviceHistoryDao;
 
 @SpaceClass(persist = true)
 @Entity
-@Table(name = "DEVICE", uniqueConstraints = { @UniqueConstraint(columnNames = { "IMEI_NUMBER" }) })
-@NamedQueries({ @NamedQuery(name = IDeviceDao.QUERY_NAME.findAll, query = IDeviceDao.QUERY.findAll) })
-public class Device extends AbstractEntity {
+@Table(name = "DEVICE_HISTORY")
+@NamedQueries({ @NamedQuery(name = IDeviceHistoryDao.QUERY_NAME.findAll, query = IDeviceHistoryDao.QUERY.findAll) })
+public class DeviceHistory extends AbstractEntity {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name = "NAME", nullable = false)
-	private String name;
+	@Column(name = "TIME", nullable = false)
+	private Timestamp time;
 
 	@Column(name = "IMEI_NUMBER", nullable = false)
 	private String imeiNumber;
-
-	@Column(name = "PHONE_NUMBER", nullable = false)
-	private String phoneNumber;
-
-	@Column(name = "DRIVER", nullable = true)
-	private String driver;
-
-	@Column(name = "ICON_NAME", nullable = true)
-	private String icon;
 
 	@Column(name = "LATITUDE", nullable = true)
 	private double latitude;
 
 	@Column(name = "LONGITUDE", nullable = true)
 	private double longitude;
-
-	@Column(name = "OWNER_ID", nullable = false)
-	private String ownerId;
-
-	@Transient
-	private Point location;
 	
 	@Transient
-	private User owner;
+	private Point location;
+
+	@Transient
+	private Device device;
 
 	@Transient
 	private boolean editStatus;
 
-	public String getName() {
-		return name;
+	@Transient
+	private UUID spaceId;
+	
+	@SpaceId(autoGenerate = false)
+	public UUID getSpaceId() {
+		return spaceId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSpaceId(final UUID spaceId) {
+		this.spaceId = spaceId;
 	}
 	
-	@SpaceId
 	@SpaceIndex
 	public String getImeiNumber() {
 		return imeiNumber;
@@ -77,36 +69,12 @@ public class Device extends AbstractEntity {
 		this.imeiNumber = imeiNumber;
 	}
 
-	public String getDriver() {
-		return driver;
+	public Timestamp getTime() {
+		return time;
 	}
 
-	public void setDriver(String driver) {
-		this.driver = driver;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public String getOwnerId() {
-		return ownerId;
-	}
-
-	public void setOwnerId(String ownerId) {
-		this.ownerId = ownerId;
+	public void setTime(Timestamp time) {
+		this.time = time;
 	}
 
 	public double getLatitude() {
@@ -125,15 +93,15 @@ public class Device extends AbstractEntity {
 		this.longitude = longitude;
 	}
 
-	public User getOwner() {
-		return owner;
+	public Device getDevice() {
+		return device;
 	}
-	
-	public void setOwner(User owner) {
-		if(owner!=null) {
-			this.ownerId = owner.getUsername();
+
+	public void setDevice(Device device) {
+		if (device != null) {
+			this.imeiNumber = device.getImeiNumber();
 		}
-		this.owner = owner;
+		this.device = device;
 	}
 
 	public Point getLocation() {

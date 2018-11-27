@@ -16,9 +16,9 @@
 						content="zk.googleAPIkey='AIzaSyBbIdmzSnlC0ye3wpunO8405YuFCDRn1pM'" />
 
 					<gmaps version="3.26" id="map"
-						children="@load(vm.selectedDevices)" lat="-1.9480402" lng="30.0612974"
-						zoom="12" hflex="1" vflex="1" showSmallCtrl="true"
-						protocol="http">
+						children="@load(vm.selectedDevices)" lat="-1.9480402"
+						lng="30.0612974" zoom="12" hflex="1" vflex="1"
+						showSmallCtrl="true" protocol="http">
 
 						<attribute name="onMapClick">
 							if (event.getReference() instanceof org.zkoss.gmaps.Gmarker) {
@@ -29,10 +29,11 @@
 						<template name="children" var="device">
 							<gmarker iconImage="@load('/img/icons/'.concat(device.icon).concat('.png'))"
 								onClick="@command('openMarker', record=device)"
-								content="@load(device.name.concat(' - ').concat(device.driver))"
+								content="@load('Device: '.concat(device.name).concat(' - Driver: ').concat(device.driver).concat(' - IMEI Number: ').concat(device.imeiNumber))"
 								lat="@load(device.latitude)" lng="@load(device.longitude)" />
 
 						</template>
+						
 					</gmaps>
 
 				</vlayout>

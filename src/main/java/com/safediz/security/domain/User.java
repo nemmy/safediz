@@ -11,6 +11,8 @@ import javax.persistence.UniqueConstraint;
 
 import com.gigaspaces.annotation.pojo.SpaceClass;
 import com.gigaspaces.annotation.pojo.SpaceExclude;
+import com.gigaspaces.annotation.pojo.SpaceId;
+import com.gigaspaces.annotation.pojo.SpaceIndex;
 import com.safediz.device.domain.AbstractEntity;
 import com.safediz.security.domain.dao.IUserDao;
 
@@ -80,6 +82,8 @@ public class User extends AbstractEntity {
 		this.status = status;
 	}
 
+	@SpaceId
+	@SpaceIndex
 	public String getUsername() {
 		return username;
 	}

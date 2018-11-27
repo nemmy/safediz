@@ -78,8 +78,8 @@ public class UserViewModel extends ViewModelHelper {
 
 		if (user != null) {
 			user.setEditStatus(!user.isEditStatus());
-			if (user.getId() == null) {
-				user.setId(UUID.randomUUID());
+			if (user.getGuid() == null) {
+				user.setGuid(UUID.randomUUID());
 				securityService.saveUser(user, user.getPassword());
 			} else {
 				securityService.saveUser(user);
@@ -102,7 +102,7 @@ public class UserViewModel extends ViewModelHelper {
 	@Command
 	@NotifyChange({ "records", "editable" })
 	public void changeEditableStatus(@BindingParam("record") final User user) {
-		if (user.getId() == null) {
+		if (user.getGuid() == null) {
 			records.remove(0);
 		} else {
 			user.setEditStatus(!user.isEditStatus());

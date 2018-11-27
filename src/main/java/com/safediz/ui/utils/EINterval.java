@@ -1,4 +1,4 @@
-package com.safediz.util;
+package com.safediz.ui.utils;
 
 public enum EINterval {
 

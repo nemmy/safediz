@@ -37,6 +37,7 @@ public class DeviceViewModel extends ViewModelHelper {
 	@Init
 	public void init(@ExecutionArgParam("record") final Device device) {
 		this.selectedDevice = device;
+		this.icon = selectedDevice == null ? null : selectedDevice.getIcon();
 		currentLocation = findCurrentLocation("minecofin.gov.rw");
 	}
 
@@ -49,8 +50,8 @@ public class DeviceViewModel extends ViewModelHelper {
 
 		if (selectedDevice != null) {
 			selectedDevice.setEditStatus(!selectedDevice.isEditStatus());
-			if (selectedDevice.getId() == null) {
-				selectedDevice.setId(UUID.randomUUID());
+			if (selectedDevice.getGuid() == null) {
+				selectedDevice.setGuid(UUID.randomUUID());
 			}
 
 			if (icon != null) {

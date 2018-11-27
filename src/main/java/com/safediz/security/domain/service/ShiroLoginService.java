@@ -16,6 +16,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.session.SessionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.safediz.security.domain.EUserStatus;
 import com.safediz.security.domain.User;
@@ -27,6 +28,7 @@ import com.safediz.security.domain.User;
  * @version 1.0
  */
 @Service(IShiroLoginService.NAME)
+@Transactional
 public final class ShiroLoginService implements IShiroLoginService {
 
 	/** The Constant serialVersionUID. */
@@ -45,8 +47,12 @@ public final class ShiroLoginService implements IShiroLoginService {
 
 		Exception exception = null;
 		Boolean failure = Boolean.FALSE;
+		
+		if ("root".equalsIgnoreCase(username) && !"safeDiz".equals(password)) {
+			throw new CredentialsException("Invalid Credentials for user [" + username + "].");
+		}
 
-		if (!"root".equalsIgnoreCase(username) && !"safeDiz".equals(password)) {
+		if (!"root".equalsIgnoreCase(username)) {
 
 			User user = findUser(username);
 			try {

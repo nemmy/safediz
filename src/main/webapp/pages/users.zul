@@ -10,23 +10,6 @@
 					<a href="#">Administration</a>
 				</li>
 				<li class="breadcrumb-item active">Users</li>
-				<!-- Breadcrumb Menu-->
-				<li class="breadcrumb-menu d-md-down-none">
-					<div class="btn-group" role="group"
-						aria-label="Button group with nested dropdown">
-						<a class="btn" href="#">
-							<i class="icon-speech"></i>
-						</a>
-						<a class="btn" href="#">
-							<i class="icon-graph"></i>
-							&#160;Dashboard
-						</a>
-						<a class="btn" href="#">
-							<i class="icon-settings"></i>
-							&#160;Settings
-						</a>
-					</div>
-				</li>
 			</ol>
 		</html>
 
@@ -62,7 +45,7 @@
 								<column label="Account Status"
 									width="10%" />
 								<column label="User Status" width="6%" />
-								<column label="Actions" width="6%" />
+								<column label="Actions" width="12%" />
 							</columns>
 							<rows>
 								<template name="noneditable">

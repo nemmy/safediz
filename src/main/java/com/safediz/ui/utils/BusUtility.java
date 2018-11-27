@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.safediz.util;
+package com.safediz.ui.utils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

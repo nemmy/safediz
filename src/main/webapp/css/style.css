@@ -1673,7 +1673,7 @@ pre {
     background-color: #fff;
     border-color: #8ad4ee;
     outline: 0;
-    box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.25); }
+    /* box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.25); */ }
   .form-control::-webkit-input-placeholder {
     color: #536c79;
     opacity: 1; }
@@ -13037,6 +13037,9 @@ border-radius: 0;
  }
  
  .nowrap{white-space: nowrap;}
+ 
+ .small {font-size: 8px !important;}
+ 
  .z-paging-input, .z-paging-text, .z-paging-info {font-size: 10px !important;}
  .z-paging-input {height: 25px; border-radius: 1px; background: #fff; margin-top: 6px;}
  .z-paging .z-paging-icon {font-size: 15px;}

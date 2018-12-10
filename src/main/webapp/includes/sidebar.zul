@@ -1,14 +1,10 @@
 <zk>
-	<window mode="overlapped" position="left,bottom"
+	<window mode="overlapped" position="left,bottom" closable="true" title="My Devices"
 		style="bottom: 50;    border-bottom: 1px solid #eff3f5;">
 		<div class="sidebar"
 			viewModel="@id('vm') @init('com.safediz.ui.DashboardComposer')">
 
 			<div class="sidebar-nav card-body">
-
-				<html>
-					<h6>My Devices</h6>
-				</html>
 
 				<textbox placeholder="Search" sclass="form-control"
 					style="font-size: x-small;   font-style: italic;" />
@@ -31,10 +27,10 @@
 								image="@load('/img/icons/'.concat(each.icon).concat('.png'))" />
 							<listcell>
 								<label value="@load(each.name)"
-									sclass="text-bold" />
+									sclass="text-bold small nowrap" />
 							</listcell>
-							<listcell label="@load(each.imeiNumber)" />
-							<listcell label="@load(each.driver)" />
+							<listcell label="@load(each.imeiNumber)" sclass="small nowrap" />
+							<listcell label="@load(each.driver)" sclass="small nowrap" />
 						</listitem>
 					</template>
 				</listbox>
